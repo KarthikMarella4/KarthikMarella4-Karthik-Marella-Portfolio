@@ -220,25 +220,33 @@ export default function Portfolio() {
       </section>
 
       {/* --- Resume Section --- */}
-      <section id="resume" className="py-32 px-6 md:px-12 text-center">
-        <FadeIn>
-          <div className="max-w-3xl mx-auto space-y-8">
-            <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter">Ready to see the<br/>Full Picture?</h2>
-            
-            <div className="flex justify-center">
-              <Button 
-                variant="primary" 
-                className="text-lg px-12 py-6" 
-                href="/Karthik Resume.pdf" 
-                download="Karthik_Marella_Resume.pdf"
-              >
-                <Download className="w-6 h-6 mr-2" />
-                Download Resume
-              </Button>
-            </div>
-          </div>
-        </FadeIn>
-      </section>
+     <section id="resume" className="py-32 px-6 md:px-12 text-center">
+  <FadeIn>
+    <div className="max-w-3xl mx-auto space-y-8">
+      <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter">
+        Ready to see the<br/>Full Picture?
+      </h2>
+
+      <div className="flex justify-center">
+        <Button 
+          asChild
+          variant="primary"
+          className="text-lg px-12 py-6"
+        >
+          <a 
+            href="Karthik_Marella_Resume.pdf" 
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Download className="w-6 h-6 mr-2" />
+            Download Resume
+          </a>
+        </Button>
+      </div>
+    </div>
+  </FadeIn>
+</section>
+
 
       {/* --- Contact Section --- */}
       <section id="contact" className="py-24 px-6 md:px-12 bg-orange-600 text-black">
