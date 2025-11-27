@@ -1,28 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, Globe, MapPin, Send, Linkedin, Mail, ExternalLink, Download, Award, Github } from 'lucide-react';
+import { Menu, Globe, MapPin, Send, Linkedin, Mail, ExternalLink, Download, Award, Github, ArrowUp } from 'lucide-react';
 import { Button } from './components/Button';
 import { FadeIn } from './components/FadeIn';
 import { NavOverlay } from './components/NavOverlay';
 import { Marquee } from './components/Marquee';
-import { CustomCursor } from './components/CustomCursor';
 import { PROJECTS, SKILLS, CERTIFICATIONS, INTERNSHIPS } from './constants';
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
-  // Scroll listener for navbar styling
+  // Scroll listener for navbar styling and progress bar
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      // Navbar background toggle
+      setScrolled(window.scrollY > 50);
+
+      // Back to top button visibility
+      setShowBackToTop(window.scrollY > 400);
+
+      // Scroll Progress calculation
+      const totalScroll = document.documentElement.scrollTop;
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scroll = `${totalScroll / windowHeight}`;
+      setScrollProgress(Number(scroll));
+    };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <div className="min-h-screen bg-[#F3F3F3] text-black font-sans selection:bg-orange-500 selection:text-white overflow-x-hidden relative">
       
+      {/* Scroll Progress Bar */}
+      <div 
+        className="fixed top-0 left-0 h-1.5 bg-orange-600 z-[60] transition-all duration-150 ease-out origin-left"
+        style={{ transform: `scaleX(${scrollProgress})`, width: '100%' }}
+      />
+
       {/* Visual Enhancements */}
-      <CustomCursor />
       <div className="fixed inset-0 pointer-events-none z-[5] opacity-[0.03] mix-blend-overlay" 
            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
       </div>
@@ -358,6 +384,17 @@ export default function Portfolio() {
            <p>&copy; 2025 KARTHIK MARELLA. ALL RIGHTS RESERVED.</p>
         </div>
       </footer>
+
+      {/* Back to Top Button */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-8 right-8 bg-black text-white p-4 transition-all duration-300 z-50 hover:bg-orange-600 ${
+          showBackToTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
+        }`}
+      >
+        <ArrowUp className="w-6 h-6" />
+      </button>
+
     </div>
   );
 }
