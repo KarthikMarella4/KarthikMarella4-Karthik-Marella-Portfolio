@@ -24,10 +24,10 @@ export const PROJECTS: Project[] = [
 ];
 
 export const SKILLS: Skill[] = [
-  { id: 1, title: "GenAI", detail: "LangChain / RAG / Prompt Engineering / Agents" },
-  { id: 2, title: "Cloud & DevOps", detail: "AWS / Azure / Docker / Jenkins" },
+  { id: 1, title: "GenAI", detail: "LangChain / RAG / Prompt Engineering / ChromaDB" },
+  { id: 2, title: "Cloud & DevOps", detail: "AWS / Azure / Docker / Jenkins / GitHub Actions / Prometheus / Grafana" },
   { id: 3, title: "Backend & API", detail: "Python / FastAPI / Django / SQL" },
-  { id: 4, title: "Tools & Platforms", detail: "NumPy / Pandas / Git / MLflow / Airflow / n8n" },
+  { id: 4, title: "Tools & Platforms", detail: "NumPy / Pandas / Git / MLflow / Airflow / n8n / ETL / DVC" },
 ];
 
 export const CERTIFICATIONS: Certification[] = [
